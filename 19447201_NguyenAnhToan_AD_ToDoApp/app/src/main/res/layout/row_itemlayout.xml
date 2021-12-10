@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dp"
-    android:background="@drawable/custom"
-    >
+    android:background="@drawable/custom">
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:soundEffectsEnabled="true" />
+
     <TextView android:id="@+id/item_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,8 +21,7 @@
         android:layout_toEndOf="@+id/checkbox"
         android:layout_toRightOf="@+id/checkbox"
         android:textColor="#000000"
-        android:textSize="20sp"
-        tools:ignore="RelativeOverlap" />
+        android:textSize="30sp" />
 
     <ImageButton
         android:id="@+id/close"
@@ -33,10 +32,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/delete"
         android:gravity="end"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
         android:src="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 </RelativeLayout>
