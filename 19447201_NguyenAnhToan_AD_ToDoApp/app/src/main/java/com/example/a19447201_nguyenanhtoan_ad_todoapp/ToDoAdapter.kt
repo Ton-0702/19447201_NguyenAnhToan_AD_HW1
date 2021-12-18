@@ -1,7 +1,6 @@
 package com.example.a19447201_nguyenanhtoan_ad_todoapp
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,11 @@ import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 
 class ToDoAdapter(context : Context , todoList : MutableList<ToDoModel>) : BaseAdapter() {
     private val inflater:LayoutInflater = LayoutInflater.from(context)
     private var itemList = todoList
     private var updateAndDelete : UpdateAndDelete = context as UpdateAndDelete
-
 
     override fun getCount(): Int {
         return itemList.size
@@ -53,6 +50,10 @@ class ToDoAdapter(context : Context , todoList : MutableList<ToDoModel>) : BaseA
         viewHolder.isDeleted.setOnClickListener {
             updateAndDelete.onItemDelete(UID)
         }
+        viewHolder.edit.setOnClickListener{
+            updateAndDelete.editTask(UID,!done)
+        }
+
 
 
         return view
@@ -61,5 +62,6 @@ class ToDoAdapter(context : Context , todoList : MutableList<ToDoModel>) : BaseA
         val textLabel : TextView = row!!.findViewById(R.id.item_textView) as TextView
         val isDone : CheckBox = row!!.findViewById(R.id.checkbox)  as CheckBox
         val isDeleted : ImageButton = row!!.findViewById(R.id.close) as ImageButton
+        val edit: ImageButton = row!!.findViewById(R.id.changes) as ImageButton
     }
 }

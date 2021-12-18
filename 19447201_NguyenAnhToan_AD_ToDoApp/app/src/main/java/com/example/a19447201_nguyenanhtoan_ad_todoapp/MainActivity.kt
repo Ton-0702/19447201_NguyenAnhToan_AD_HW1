@@ -1,16 +1,14 @@
 package com.example.a19447201_nguyenanhtoan_ad_todoapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
-//import com.google.firebase.database.R
-
 
 
 class MainActivity : AppCompatActivity() , UpdateAndDelete {
@@ -92,5 +90,31 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
         val itemReference = database.child("todo").child(itemUID)
         itemReference.removeValue()
         adapter.notifyDataSetChanged()
+    }
+
+
+
+    override fun editTask(itemUID: String, isDone : Boolean){
+        val itemReference = database.child("todo").child(itemUID)
+        fun addItemToList(snapshot: DataSnapshot) {
+            val items = snapshot.children.iterator()
+            if(items.hasNext()){
+                val todoIndexdvalue = items.next()
+                val itemsIterator = todoIndexdvalue.children.iterator()
+                while(itemsIterator.hasNext()){
+                    val currentItem = itemsIterator.next()
+                    val todoItemData = ToDoModel.createList()
+                    val map = currentItem.getValue() as HashMap<String , Any>
+                    todoItemData.UID = currentItem.key
+                    todoItemData.done = map.get("done") as Boolean?
+                    todoItemData.itemDataText = map.get("itemDataText") as String?
+                    itemReference.setValue(todoItemData)
+                }
+            }
+            adapter.notifyDataSetChanged()
+        }
+
+//        itemReference.child("done").setValue(isDone)
+
     }
 }
